@@ -1,12 +1,17 @@
+# cmake generated files
 **/CMakeFiles/
-**/doxygen/
 Makefile
 CMakeCache.txt
 install_manifest.txt
 cmake_install.cmake
 
+# doxygen generated files
+**/doxygen/
+
+# temporary files
 *~
 
+# binaries
 **/bin
 **/obj
 *.obj
@@ -16,8 +21,10 @@ cmake_install.cmake
 *.a
 console/owebpp-console
 
+# owebpp generated files
 _owebpp_generated*
 
+# code blocks files
 *.cbp
 *.layout
 *.depend
