@@ -1,7 +1,7 @@
 # Introduction
 
-owebpp is a c++ 20 web framework. The project is currently in development, suggestions are welcome !
-The framework has a code generator that is used to do the link between its own code and yours, see examples.
+owebpp is a c++ 20 web framework. The project is currently in development, suggestions are welcome !\
+The framework has a code generator that is used to do the link between the framework and your code, see examples.
 
 # Build
 
