@@ -1,0 +1,20 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.02)
+PROJECT(owebpp VERSION 0.0.1)
+
+INCLUDE(./cmake/common.cmake)
+
+OPTION(DISABLE_METADATA_LOG "Disable metadata logging." OFF)
+IF(DISABLE_METADATA_LOG)
+    ADD_COMPILE_OPTIONS(-DDISABLE_METADATA_LOG)
+ENDIF(DISABLE_METADATA_LOG)
+UNSET(DISABLE_METADATA_LOG CACHE)
+
+INSTALL(DIRECTORY include/owebpp DESTINATION include)
+
+ADD_SUBDIRECTORY(console)
+
+# Generate documentation for the project
+ADD_CUSTOM_TARGET(owebpp-doc-gen
+  COMMAND
+    doxygen doxygen.conf
+    VERBATIM)

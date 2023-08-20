@@ -1,0 +1,25 @@
+ADD_COMPILE_OPTIONS(-std=c++20
+                    -Wnon-virtual-dtor
+                    -Wshadow
+                    -Winit-self
+                    -Wredundant-decls
+                    -Wcast-align
+                    -Wundef
+                    -Wfloat-equal
+                    -Winline
+                    -Wunreachable-code
+                    -Wmissing-declarations
+                    -Wswitch-enum
+                    -Wswitch-default
+                    -Weffc++
+                    -Wmain
+                    -pedantic-errors
+                    -pedantic
+                    -Wextra
+                    -Wall
+                    -fPIC
+                    -fvisibility=hidden
+                    -O2
+                    -s
+                    -fPIC
+                    -fexpensive-optimizations)

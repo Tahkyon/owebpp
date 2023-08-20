@@ -1,0 +1,35 @@
+---
+routes:
+  - no_param_route:
+    path: /no_param_route
+    methods: GET
+    class_name: NoParamRouteClass
+    class_include: include/NoParamRouteClass.hpp
+    function_name: noParamRouteFunction
+  - one_param_route:
+    path: /one_param_route/:param1
+    methods: GET
+    class_name: OneParamRouteClass
+    class_include: include/OneParamRouteClass.hpp
+    function_name: oneParamRouteFunction
+    function_parameters:
+      - std::string
+  - three_param_route:
+    path: /three_param_route/:param1/:var2/:id
+    methods: GET
+    class_name: ThreeParamRouteClass
+    class_include: include/ThreeParamRouteClass.hpp
+    function_name: threeParamRouteFunction
+    function_parameters: [std::string, std::string, std::string]
+  - two_methods_route:
+    path: /two_methods_route
+    methods: GET|POST
+    class_name: MultipleMethodsRouteClass
+    class_include: include/MultipleMethodsRouteClass.hpp
+    function_name: multipleMethodsRouteFunction
+  - namespace_route:
+    path: /namespace_route
+    methods: GET
+    class_name: example_namespace::NamespaceRouteClass
+    class_include: include/NamespaceRouteClass.hpp
+    function_name: namespaceRouteFunction
