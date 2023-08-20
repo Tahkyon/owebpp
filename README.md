@@ -7,7 +7,7 @@ The framework has a code generator that is used to do the link between its own c
 
 ## Linux
 
-While we use cmake to allow for cross platform build, the only platform that has been tested currently is *g++ 11.4.0 on Ubuntu 22.04.2*. The project also requires support for c++20. The following commands allow to build/deploy the library as well as the code generator. Examples require additionnal configuration.
+While we use cmake to allow for cross platform build, the only platform that has been tested currently is *g++ 11.4.0 on Ubuntu 22.04.2*. Examples require additionnal configuration.
 
 ```sh
 sudo apt install cmake g++ git libpcre3-dev libpcre++-dev zlib1g-dev
