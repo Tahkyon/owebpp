@@ -31,7 +31,7 @@
 #include <sstream>
 #include <string>
 
-#include "include/_oweb_generated_code.hpp"
+#include "include/_owebpp_generated_code.hpp"
 
 /// Mandatory logger initialization
 OWEBPP_STATIC_INIT_LOGGER
