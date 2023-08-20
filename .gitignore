@@ -28,3 +28,6 @@ _owebpp_generated*
 *.cbp
 *.layout
 *.depend
+
+#else
+*.orig

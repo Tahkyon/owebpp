@@ -1,25 +1,25 @@
 /*************************************************************************************
- *	MIT License
+ *    MIT License
  *
- *	Copyright (c) 2023 Oliver Gibson
+ *    Copyright (c) 2023 Oliver Gibson
  *
- *	Permission is hereby granted, free of charge, to any person obtaining a copy
- *	of this software and associated documentation files (the "Software"), to deal
- *	in the Software without restriction, including without limitation the rights
- *	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- *	copies of the Software, and to permit persons to whom the Software is
- *	furnished to do so, subject to the following conditions:
+ *    Permission is hereby granted, free of charge, to any person obtaining a copy
+ *    of this software and associated documentation files (the "Software"), to deal
+ *    in the Software without restriction, including without limitation the rights
+ *    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ *    copies of the Software, and to permit persons to whom the Software is
+ *    furnished to do so, subject to the following conditions:
  *
- *	The above copyright notice and this permission notice shall be included in all
- *	copies or substantial portions of the Software.
+ *    The above copyright notice and this permission notice shall be included in all
+ *    copies or substantial portions of the Software.
  *
- *	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- *	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- *	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- *	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- *	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- *	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- *	SOFTWARE.
+ *    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ *    SOFTWARE.
 *************************************************************************************/
 #include <fstream>
 #include <iostream>
@@ -41,26 +41,26 @@ namespace owebpp::console {
         std::shared_ptr<std::vector<std::shared_ptr<RouteModel>>> routes_models(std::make_shared<std::vector<std::shared_ptr<RouteModel>>>());
 
         if(routes_node) {
-			/* Iterate all routes. */
-			for(const auto& route : routes_node) {
-				/* TODO: try to find a more straight forward way to do it, we need to go through a output stream to get the node data... */
-				std::ostringstream oss;
-				oss << route;
-				std::istringstream iss(oss.str());
-				std::string route_name;
-				/* We get all the string corresponding to the node which includes sub nodes ect... So we get the string part up to the first : */
-				getline(iss, route_name, ':');
+            /* Iterate all routes. */
+            for(const auto& route : routes_node) {
+                /* TODO: try to find a more straight forward way to do it, we need to go through a output stream to get the node data... */
+                std::ostringstream oss;
+                oss << route;
+                std::istringstream iss(oss.str());
+                std::string route_name;
+                /* We get all the string corresponding to the node which includes sub nodes ect... So we get the string part up to the first : */
+                getline(iss, route_name, ':');
 
                 std::shared_ptr<std::vector<std::string>> parameters_list(std::make_shared<std::vector<std::string>>());
 
                 // Iterate function parameters.
-				for(const YAML::Node& parameter_node : route["function_parameters"]) {
+                for(const YAML::Node& parameter_node : route["function_parameters"]) {
                     parameters_list->push_back(parameter_node.as<std::string>());
-				}
+                }
 
-				const YAML::Node& methods_node(route["methods"]);
-				int allowed_methods = 0;
-				if(methods_node) {
+                const YAML::Node& methods_node(route["methods"]);
+                int allowed_methods = 0;
+                if(methods_node) {
                     if(methods_node.IsNull() || methods_node.as<std::string>() == "") {
                         throw NullOrEmptyRouteFieldException(route_name, "methods");
                     }
@@ -77,11 +77,11 @@ namespace owebpp::console {
                         }
                         allowed_methods |= tmp;
                     }
-				} else {
+                } else {
                     throw MissingRouteFieldException(route_name, "methods");
-				}
-				// Retrieve path node data.
-				std::string path;
+                }
+                // Retrieve path node data.
+                std::string path;
                 const YAML::Node& path_node(route["path"]);
                 if(path_node) {
                     if(path_node.IsNull() || path_node.as<std::string>() == "") {
@@ -93,7 +93,7 @@ namespace owebpp::console {
                 }
 
                 // Retrieve class name node data.
-				std::string class_name;
+                std::string class_name;
                 const YAML::Node& class_name_node(route["class_name"]);
                 if(class_name_node) {
                     if(class_name_node.IsNull() || class_name_node.as<std::string>() == "") {
@@ -104,7 +104,7 @@ namespace owebpp::console {
                     throw MissingRouteFieldException(route_name, "class_name");
                 }
                 // Retrieve class include node data.
-				std::string class_include;
+                std::string class_include;
                 const YAML::Node& class_include_node(route["class_include"]);
                 if(class_include_node) {
                     if(class_include_node.IsNull() || class_include_node.as<std::string>() == "") {
@@ -115,7 +115,7 @@ namespace owebpp::console {
                     throw MissingRouteFieldException(route_name, "class_include");
                 }
                 // Retrieve function name node data.
-				std::string function_name;
+                std::string function_name;
                 const YAML::Node& function_name_node(route["function_name"]);
                 if(function_name_node) {
                     if(function_name_node.IsNull() || function_name_node.as<std::string>() == "") {
@@ -133,11 +133,11 @@ namespace owebpp::console {
                     class_include,
                     function_name,
                     parameters_list));
-			}
-		} else {
+            }
+        } else {
             OWEBPP_LOG_ERROR("Missing [routes] field in yaml file.");
-		}
-		return routes_models;
+        }
+        return routes_models;
     }
 
     void RouteCodeGenerator::writeGeneratedRoutesFile(const std::string& output_file, const std::shared_ptr<std::vector<std::shared_ptr<RouteModel>>> routes) {
@@ -196,7 +196,7 @@ namespace owebpp::console {
         fs << "#endif" << std::endl;
     }
 
-	std::string RouteCodeGenerator::convertYAMLRegexToCppRegex(std::string yaml_regex, [[maybe_unused]] const std::shared_ptr<std::vector<std::string>>& function_parameters) {
+    std::string RouteCodeGenerator::convertYAMLRegexToCppRegex(std::string yaml_regex, [[maybe_unused]] const std::shared_ptr<std::vector<std::string>>& function_parameters) {
 
         std::istringstream route_stream(yaml_regex);
         std::string route_part;
@@ -210,9 +210,9 @@ namespace owebpp::console {
             }
         }
         return reconstructed_regex;
-	}
+    }
 
-	bool RouteCodeGenerator::generateCode(bool is_generator_ok) {
+    bool RouteCodeGenerator::generateCode(bool is_generator_ok) {
         try {
             YAML::Node config = YAML::LoadFile(m_yaml_file_name);
             YAML::Node routes_node = config["routes"];
@@ -243,5 +243,5 @@ namespace owebpp::console {
             is_generator_ok = false;
         }
         return is_generator_ok;
-	}
+    }
 }
