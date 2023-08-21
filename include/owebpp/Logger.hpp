@@ -181,7 +181,7 @@ namespace owebpp {
              */
             static Logger& getInstance() {
                 if(s_logger==nullptr){
-                    s_logger = std::make_unique<Logger>();
+                    s_logger = std::make_shared<Logger>();
                 }
                 return *s_logger;
             }

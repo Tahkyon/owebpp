@@ -33,7 +33,7 @@
 
 #include "include/_owebpp_generated_code.hpp"
 
-/// Mandatory logger initialization
+// Mandatory logger initialization
 OWEBPP_STATIC_INIT_LOGGER
 
 extern "C" {

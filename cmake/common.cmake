@@ -6,7 +6,6 @@ ADD_COMPILE_OPTIONS(-std=c++20
                     -Wcast-align
                     -Wundef
                     -Wfloat-equal
-                    -Winline
                     -Wunreachable-code
                     -Wmissing-declarations
                     -Wswitch-enum

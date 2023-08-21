@@ -61,7 +61,7 @@ namespace owebpp {
              */
             static Router& getInstance() {
                 if(s_router==nullptr){
-                    s_router = std::make_unique<Router>();
+                    s_router = std::make_shared<Router>();
                 }
                 return *s_router;
             }
