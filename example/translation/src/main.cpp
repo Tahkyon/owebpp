@@ -65,7 +65,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[]) {
     std::cout << mt_us.translate("translation.with.parameters", 5) << std::endl;
     // Too many parameters check logs.
     std::cout << mt_us.translate("translation.with.parameters", 5, 2.5,"test") << std::endl;
-    // Additional tests with text and pointers.
+    // Additional example with text and pointers.
     std::cout << mt_us.translate("translation.more.tests", "my test string", &mt_us) << std::endl;
     return 0;
 }

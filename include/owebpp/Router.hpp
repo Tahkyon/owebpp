@@ -45,7 +45,7 @@ namespace owebpp {
 
             /* Deleted constructors */
             Router(const Router& r) = delete;
-            Router(Router&& r) = default;
+            Router(Router&& r) = delete;
 
             /* Deleted assignment operators */
             Router& operator=(const Router&) = delete;
@@ -86,7 +86,7 @@ namespace owebpp {
                     }
                 }
                 std::shared_ptr<Response> response = std::make_shared<Response>();
-                response->setSatusCode(HttpStatusCodes::NOT_FOUND);
+                response->setSatusCode(HttpStatusCode::NOT_FOUND);
                 return response;
             }
 

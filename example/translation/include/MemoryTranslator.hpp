@@ -28,7 +28,7 @@
 #include <owebpp/Logger.hpp>
 #include <owebpp/Translator.hpp>
 
-/** This class is uses in memory data to perform translations. */
+/** This class uses in memory data to perform translations. */
 class MemoryTranslator : public owebpp::Translator {
     public:
         /* Constructors */

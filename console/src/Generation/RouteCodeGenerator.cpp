@@ -156,13 +156,12 @@ namespace owebpp::console {
         fs << "#include <owebpp/Request.hpp>" << std::endl;
         fs << "#include <regex>" << std::endl;
         fs << std::endl;
-        fs << "namespace owebpp::generated {" << std::endl;
 
         /* Iterate routes and write corresponding code. */
         for(size_t i = 0; i < routes->size(); i++) {
+            fs << "#include \"" << (*routes)[i]->getClassInclude() << '"' << std::endl;
             fs << std::endl;
-            fs << "\t#include \"" << (*routes)[i]->getClassInclude() << '"' << std::endl;
-            fs << std::endl;
+            fs << "namespace owebpp::generated {" << std::endl;
 
             fs << "\tclass _owebpp_genroute_" << (*routes)[i]->getName() << (*routes)[i]->getFunctionName() << " final : public owebpp::AbstractRoute " << '{' << std::endl;
             fs << "\t\tpublic:" << std::endl;
@@ -180,9 +179,9 @@ namespace owebpp::console {
             fs << ");" << std::endl;
             fs << "\t\t\t}" << std::endl;
             fs << "\t};" << std::endl;
+            fs << '}' << std::endl;
+            fs << std::endl;
         }
-        fs << '}' << std::endl;
-        fs << std::endl;
         /* Write code for routes list population. */
         fs << "void owebpp::Router::loadRoutes() {" << std::endl;
         for(size_t i = 0; i < routes->size(); i++) {

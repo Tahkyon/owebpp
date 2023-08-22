@@ -24,7 +24,7 @@
 #ifndef OWEBPP_RESPONSE_HPP
 #define OWEBPP_RESPONSE_HPP
 
-#include <owebpp/HttpStatusCodes.hpp>
+#include <owebpp/HttpStatusCode.hpp>
 #include <string>
 #include <vector>
 
@@ -40,11 +40,11 @@ namespace owebpp {
                 m_content(""),
                 m_charset("utf-8"),
                 m_content_type("text/plain"),
-                m_status_code(HttpStatusCodes::OK),
+                m_status_code(HttpStatusCode::OK),
                 m_headers() {}
 
             /* Deleted constructors */
-            Response(const Request& r) = delete;
+            Response(const Response& r) = delete;
             Response(Response&& r) = default;
 
             /* Deleted assignment operators */
@@ -107,14 +107,14 @@ namespace owebpp {
              * Getter for the response status code.
              * @return The response status code.
              */
-            inline HttpStatusCodes getSatusCode() const { return m_status_code; }
+            inline HttpStatusCode getSatusCode() const { return m_status_code; }
 
             /**
              * Setter for the response status code.
              * @param status_code The status code to use for the response.
              * @return The response.
              */
-            inline Response& setSatusCode(HttpStatusCodes status_code) {
+            inline Response& setSatusCode(HttpStatusCode status_code) {
                 m_status_code = status_code;
                 return *this;
             }
@@ -147,7 +147,7 @@ namespace owebpp {
             std::string m_content_type;
 
             /** The response status code. */
-            HttpStatusCodes m_status_code;
+            HttpStatusCode m_status_code;
 
             /** The response headers. */
             std::vector<std::string> m_headers;
