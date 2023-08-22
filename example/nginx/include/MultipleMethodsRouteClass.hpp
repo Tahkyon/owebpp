@@ -24,7 +24,9 @@
 #ifndef MULTIPLE_METHODS_ROUTE_CLASS_HPP
 #define MULTIPLE_METHODS_ROUTE_CLASS_HPP
 
+#include <fstream>
 #include <memory>
+#include <owebpp/HttpStatusCode.hpp>
 #include <owebpp/Request.hpp>
 #include <owebpp/Response.hpp>
 
@@ -46,9 +48,16 @@ class MultipleMethodsRouteClass {
 
         /* Functions */
         /** This method is called when accessing url /two_methods_route via GET or POST. */
-        [[nodiscard]] std::shared_ptr<owebpp::Response> multipleMethodsRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req) {
+        [[nodiscard]]  std::shared_ptr<owebpp::Response> multipleMethodsRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req) {
             std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-            res->setContent("Multiple methods content.");
+
+            std::ifstream t("/usr/local/etc/owebpp-example-lib-nginx/index.html");
+            std::stringstream buffer;
+            buffer << t.rdbuf();
+
+            res->setContent(buffer.str());
+            res->setContentType("text/html");
+            res->setSatusCode(owebpp::HttpStatusCode::OK);
             return res;
         }
 };

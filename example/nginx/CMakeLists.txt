@@ -16,4 +16,4 @@ ADD_DEPENDENCIES(owebpp-example-lib-nginx owebpp-code-generation)
 
 INSTALL(TARGETS owebpp-example-lib-nginx
     LIBRARY DESTINATION lib/owebpp/examples)
-INSTALL(FILES nginx.conf DESTINATION etc/owebpp-example-lib-nginx/)
+INSTALL(FILES nginx.conf index.html DESTINATION etc/owebpp-example-lib-nginx/)
