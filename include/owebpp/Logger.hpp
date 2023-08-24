@@ -82,12 +82,12 @@ namespace owebpp {
                 Logger(LogLevel::LOG_DEBUG, nullptr, DEFAULT_DATE_TIME_FORMAT) {}
 
             /* Deleted constructors */
-            Logger(const Logger& r) = delete;
-            Logger(Logger&& r) = delete;
+            Logger(const Logger& o) = delete;
+            Logger(Logger&& o) = delete;
 
             /* Deleted assignment operators */
-            Logger& operator=(const Logger& r) = delete;
-            Logger& operator=(Logger&& r) = delete;
+            Logger& operator=(const Logger& o) = delete;
+            Logger& operator=(Logger&& o) = delete;
 
             /* Destructor */
             virtual ~Logger() = default;

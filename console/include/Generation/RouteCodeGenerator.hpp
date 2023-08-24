@@ -47,12 +47,12 @@ namespace owebpp::console {
 
             /* Deleted constructors */
             RouteCodeGenerator() = delete;
-            RouteCodeGenerator(const RouteCodeGenerator& r) = delete;
-            RouteCodeGenerator(RouteCodeGenerator&& r) = delete;
+            RouteCodeGenerator(const RouteCodeGenerator& o) = delete;
+            RouteCodeGenerator(RouteCodeGenerator&& o) = delete;
 
             /* Deleted assignment operators */
-            RouteCodeGenerator& operator=(const RouteCodeGenerator& r) = delete;
-            RouteCodeGenerator& operator=(RouteCodeGenerator&& r) = delete;
+            RouteCodeGenerator& operator=(const RouteCodeGenerator& o) = delete;
+            RouteCodeGenerator& operator=(RouteCodeGenerator&& o) = delete;
 
             /* Destructor */
             ~RouteCodeGenerator() = default;

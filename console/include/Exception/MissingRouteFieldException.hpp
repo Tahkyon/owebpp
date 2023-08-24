@@ -43,12 +43,12 @@ namespace owebpp::console {
 
             /* Deleted constructors */
             MissingRouteFieldException() = delete;
-            MissingRouteFieldException(const MissingRouteFieldException& r) = delete;
-            MissingRouteFieldException(MissingRouteFieldException&& r) = delete;
+            MissingRouteFieldException(const MissingRouteFieldException& o) = delete;
+            MissingRouteFieldException(MissingRouteFieldException&& o) = delete;
 
             /* Deleted assignment operators */
-            MissingRouteFieldException& operator = (const MissingRouteFieldException& r) = delete;
-            MissingRouteFieldException& operator=(MissingRouteFieldException&& r) = delete;
+            MissingRouteFieldException& operator = (const MissingRouteFieldException& o) = delete;
+            MissingRouteFieldException& operator=(MissingRouteFieldException&& o) = delete;
 
             /* Destructor */
             virtual ~MissingRouteFieldException() = default;

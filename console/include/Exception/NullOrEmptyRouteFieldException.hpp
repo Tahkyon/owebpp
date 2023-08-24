@@ -42,12 +42,12 @@ namespace owebpp::console {
 
                 /* Deleted constructors */
                 NullOrEmptyRouteFieldException() = delete;
-                NullOrEmptyRouteFieldException(const NullOrEmptyRouteFieldException& r) = delete;
-                NullOrEmptyRouteFieldException(NullOrEmptyRouteFieldException&& r) = delete;
+                NullOrEmptyRouteFieldException(const NullOrEmptyRouteFieldException& o) = delete;
+                NullOrEmptyRouteFieldException(NullOrEmptyRouteFieldException&& o) = delete;
 
                 /* Deleted assignment operators */
-                NullOrEmptyRouteFieldException& operator=(const NullOrEmptyRouteFieldException& r) = delete;
-                NullOrEmptyRouteFieldException& operator=(NullOrEmptyRouteFieldException&& r) = delete;
+                NullOrEmptyRouteFieldException& operator=(const NullOrEmptyRouteFieldException& o) = delete;
+                NullOrEmptyRouteFieldException& operator=(NullOrEmptyRouteFieldException&& o) = delete;
 
                 /* Destructor */
                 virtual ~NullOrEmptyRouteFieldException() = default;

@@ -21,38 +21,39 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
 *************************************************************************************/
-#ifndef ONE_PARAM_ROUTE_CLASS_HPP
-#define ONE_PARAM_ROUTE_CLASS_HPP
+#ifndef OWEBPP_AUTHENTICATOR_HPP
+#define OWEBPP_AUTHENTICATOR_HPP
 
 #include <memory>
-#include <owebpp/Request.hpp>
-#include <owebpp/Response.hpp>
 
-class OneParamRouteClass {
-    public:
-        /* Constructors */
-        OneParamRouteClass() = default;
+namespace owebpp {
+    /** This class is used to perform user authentication. */
+    class Authenticator {
+        public:
+            /* Constructors */
+            /** Construct a default authenticator. */
+            Authenticator() = default;
 
-        /* Deleted constructors */
-        OneParamRouteClass(const OneParamRouteClass& o) = delete;
-        OneParamRouteClass(OneParamRouteClass&& o) = delete;
+            /* Deleted constructors */
+            Authenticator(const Authenticator& o) = delete;
+            Authenticator(Authenticator&& o) = delete;
 
-        /* Deleted assignment operators */
-        OneParamRouteClass& operator=(const OneParamRouteClass& o) = delete;
-        OneParamRouteClass& operator=(OneParamRouteClass&& o) = delete;
+            /* Deleted assignment operators */
+            Authenticator& operator=(const Authenticator& o) = delete;
+            Authenticator& operator=(Authenticator&& o) = delete;
 
-        /* Destructor. */
-        virtual ~OneParamRouteClass() = default;
+            /* Destructor */
+            virtual ~Authenticator() = default;
 
-        /**
-         * This method is called when accessing url /one_param_route/:param1 via GET where :param1 is a parameter.
-         * As you can see the function has a parameter in addition to the request object.
-         */
-        [[nodiscard]] std::shared_ptr<owebpp::Response> oneParamRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req, const std::string& param1) {
-            std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-            res->setContent("one param content: " + param1);
-            return res;
-        }
-};
+            /* Functions */
+            /**
+             * Try to authenticate a user based on request data.
+             * @param req The request to use to authenticate a user.
+             * @return true if the user was authenticated, false otherwise.
+             */
+            virtual bool authenticate(const std::shared_ptr<Request>& req) = 0;
+    };
+}
 
-#endif // ONE_PARAM_ROUTE_CLASS_HPP
+#endif // OWEBPP_AUTHENTICATOR_HPP
+

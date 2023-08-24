@@ -21,8 +21,8 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
 *************************************************************************************/
-#ifndef OWEBPP_HTTP_METHODS_HPP
-#define OWEBPP_HTTP_METHODS_HPP
+#ifndef OWEBPP_HTTP_METHOD_HPP
+#define OWEBPP_HTTP_METHOD_HPP
 
 #include <cstddef>
 
@@ -48,19 +48,19 @@ namespace owebpp {
     };
 
     /** Provides utility functions to convert to and from string. */
-    class HttpMethodsUtils final {
+    class HttpMethodUtils final {
         public:
             /* Deleted constructors */
-            HttpMethodsUtils() = delete;
-            HttpMethodsUtils(const HttpMethodsUtils& r) = delete;
-            HttpMethodsUtils(HttpMethodsUtils&& r) = delete;
+            HttpMethodUtils() = delete;
+            HttpMethodUtils(const HttpMethodUtils& o) = delete;
+            HttpMethodUtils(HttpMethodUtils&& o) = delete;
 
             /* Deleted assignment operators */
-            HttpMethodsUtils& operator=(const HttpMethodsUtils& r) = delete;
-            HttpMethodsUtils& operator=(HttpMethodsUtils&& r) = delete;
+            HttpMethodUtils& operator=(const HttpMethodUtils& o) = delete;
+            HttpMethodUtils& operator=(HttpMethodUtils&& o) = delete;
 
             /* Deleted destructor */
-            ~HttpMethodsUtils() = delete;
+            ~HttpMethodUtils() = delete;
 
             /* Functions */
             /**
@@ -69,7 +69,7 @@ namespace owebpp {
              * @return The HttpMethod corresponding to the given string.
              */
             static HttpMethod convertMethodStringToValue(const std::string& method_str) {
-                HttpMethods method = HttpMethods::HTTP_UNKNOWN;
+                HttpMethod method = HttpMethod::HTTP_UNKNOWN;
                 if(method_str == "GET") {
                     method = HttpMethod::HTTP_GET;
                 } else if(method_str == "HEAD") {
@@ -112,52 +112,52 @@ namespace owebpp {
             static std::string convertMethodToString(HttpMethod method) {
                 std::string result;
                 switch(method) {
-                    case HttpMethods::HTTP_GET:
+                    case HttpMethod::HTTP_GET:
                         result = "GET";
                         break;
-                    case HttpMethods::HTTP_HEAD:
+                    case HttpMethod::HTTP_HEAD:
                         result = "HEAD";
                         break;
-                    case HttpMethods::HTTP_POST:
+                    case HttpMethod::HTTP_POST:
                         result = "POST";
                         break;
-                    case HttpMethods::HTTP_PUT:
+                    case HttpMethod::HTTP_PUT:
                         result = "PUT";
                         break;
-                    case HttpMethods::HTTP_DELETE:
+                    case HttpMethod::HTTP_DELETE:
                         result = "DELETE";
                         break;
-                    case HttpMethods::HTTP_MKCOL:
+                    case HttpMethod::HTTP_MKCOL:
                         result = "MKCOL";
                         break;
-                    case HttpMethods::HTTP_COPY:
+                    case HttpMethod::HTTP_COPY:
                         result = "COPY";
                         break;
-                    case HttpMethods::HTTP_MOVE:
+                    case HttpMethod::HTTP_MOVE:
                         result = "MOVE";
                         break;
-                    case HttpMethods::HTTP_OPTIONS:
+                    case HttpMethod::HTTP_OPTIONS:
                         result = "OPTIONS";
                         break;
-                    case HttpMethods::HTTP_PROPFIND:
+                    case HttpMethod::HTTP_PROPFIND:
                         result = "PROPFIND";
                         break;
-                    case HttpMethods::HTTP_PROPPATCH:
+                    case HttpMethod::HTTP_PROPPATCH:
                         result = "PROPPATCH";
                         break;
-                    case HttpMethods::HTTP_LOCK:
+                    case HttpMethod::HTTP_LOCK:
                         result = "LOCK";
                         break;
-                    case HttpMethods::HTTP_UNLOCK:
+                    case HttpMethod::HTTP_UNLOCK:
                         result = "UNLOCK";
                         break;
-                    case HttpMethods::HTTP_PATCH:
+                    case HttpMethod::HTTP_PATCH:
                         result = "PATCH";
                         break;
-                    case HttpMethods::HTTP_TRACE:
+                    case HttpMethod::HTTP_TRACE:
                         result = "TRACE";
                         break;
-                    case HttpMethods::HTTP_UNKNOWN:
+                    case HttpMethod::HTTP_UNKNOWN:
                         result="UNKNOWN";
                         break;
                     default:
@@ -168,4 +168,4 @@ namespace owebpp {
             }
     };
 }
-#endif //OWEBPP_HTTP_METHODS_HPP
+#endif //OWEBPP_HTTP_METHOD_HPP

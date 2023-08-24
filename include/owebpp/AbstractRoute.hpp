@@ -48,12 +48,12 @@ namespace owebpp {
 
             /* Deleted constructors */
             AbstractRoute() = delete;
-            AbstractRoute(const AbstractRoute& r) = delete;
-            AbstractRoute(AbstractRoute&& r) = delete;
+            AbstractRoute(const AbstractRoute& o) = delete;
+            AbstractRoute(AbstractRoute&& o) = delete;
 
             /* Deleted assignment operators */
-            AbstractRoute& operator=(const AbstractRoute& r) = delete;
-            AbstractRoute& operator=(AbstractRoute&& r) = delete;
+            AbstractRoute& operator=(const AbstractRoute& o) = delete;
+            AbstractRoute& operator=(AbstractRoute&& o) = delete;
 
             /* Destructor */
             virtual ~AbstractRoute() = default;

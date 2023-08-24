@@ -39,12 +39,12 @@ namespace owebpp {
             Translator() = default;
 
             /* Deleted constructors */
-            Translator(const Translator& r) = delete;
-            Translator(Translator&& r) = delete;
+            Translator(const Translator& o) = delete;
+            Translator(Translator&& o) = delete;
 
             /* Deleted assignment operators */
-            Translator& operator=(const Translator& r) = delete;
-            Translator& operator=(Translator&& r) = delete;
+            Translator& operator=(const Translator& o) = delete;
+            Translator& operator=(Translator&& o) = delete;
 
             /* Destructor */
             virtual ~Translator() = default;

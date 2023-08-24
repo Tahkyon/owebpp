@@ -44,12 +44,12 @@ namespace owebpp {
                 m_headers() {}
 
             /* Deleted constructors */
-            Response(const Response& r) = delete;
-            Response(Response&& r) = default;
+            Response(const Response& o) = delete;
+            Response(Response&& o) = delete;
 
             /* Deleted assignment operators */
-            Response& operator=(const Response&) = delete;
-            Response& operator=(Response&& r) = delete;
+            Response& operator=(const Response& o) = delete;
+            Response& operator=(Response&& o) = delete;
 
             /* Destructor */
             ~Response() = default;

@@ -28,18 +28,20 @@
 #include <owebpp/Request.hpp>
 #include <owebpp/Response.hpp>
 
+#include "include/BasicAuthenticator.hpp"
+
 class NoParamRouteClass {
     public:
         /* Constructors */
         NoParamRouteClass() = default;
 
         /* Deleted constructors */
-        NoParamRouteClass(const NoParamRouteClass& r) = delete;
-        NoParamRouteClass(NoParamRouteClass&& r) = delete;
+        NoParamRouteClass(const NoParamRouteClass& o) = delete;
+        NoParamRouteClass(NoParamRouteClass&& o) = delete;
 
         /* Deleted assignment operators */
-        NoParamRouteClass& operator=(const NoParamRouteClass&) = delete;
-        NoParamRouteClass& operator=(NoParamRouteClass&& r) = delete;
+        NoParamRouteClass& operator=(const NoParamRouteClass& o) = delete;
+        NoParamRouteClass& operator=(NoParamRouteClass&& o) = delete;
 
         /* Destructor */
         virtual ~NoParamRouteClass() = default;
@@ -47,7 +49,7 @@ class NoParamRouteClass {
         /** This method is called when accessing url /no_param_route via GET. This is a basic example on how to use the framework. */
         [[nodiscard]] std::shared_ptr<owebpp::Response> noParamRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req) {
             std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-            res->setContent("no param content.");
+            res->setContent("no parameter route.");
             return res;
         }
 };

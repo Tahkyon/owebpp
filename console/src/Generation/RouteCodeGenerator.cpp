@@ -67,7 +67,7 @@ namespace owebpp::console {
                     std::istringstream allowed_methods_stream(route["methods"].as<std::string>());
                     std::string http_method_allowed;
                     while (getline(allowed_methods_stream, http_method_allowed, '|')) {
-                        size_t tmp = HttpMethodsUtils::convertMethodStringToValue(http_method_allowed);
+                        size_t tmp = (size_t)HttpMethodUtils::convertMethodStringToValue(http_method_allowed);
                         if(tmp == 0) {
                             if(http_method_allowed == "") {
                                 OWEBPP_LOG_WARNING("Method is an empty string.");

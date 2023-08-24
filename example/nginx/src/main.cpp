@@ -62,7 +62,7 @@ extern "C" {
     static std::shared_ptr<owebpp::Request> buildRequest(ngx_link_func_ctx_t *ctx);
 
     void ngx_link_func_init_cycle([[maybe_unused]] ngx_link_func_cycle_t* cycle) {
-        std::shared_ptr<std::ofstream> output = std::make_shared<std::ofstream>("/var/log/libnginx.log", std::ios::app);
+        std::shared_ptr<std::ofstream> output = std::make_shared<std::ofstream>("/var/log/libnginx.log", std::ios::trunc | std::ios::out);
         std::shared_ptr<owebpp::Logger> logger = std::make_shared<owebpp::Logger>(owebpp::LogLevel::LOG_DEBUG, output, DEFAULT_DATE_TIME_FORMAT);
         owebpp::Logger::setLogger(logger);
         OWEBPP_LOG_INFO("Starting application.");
@@ -70,56 +70,56 @@ extern "C" {
 
     static std::shared_ptr<owebpp::Request> buildRequest(ngx_link_func_ctx_t *ctx) {
         ngx_http_request_t* req = (ngx_http_request_t*)ctx->__r__;
-        owebpp::HttpMethods method(owebpp::HttpMethods::HTTP_UNKNOWN);
+        owebpp::HttpMethod method(owebpp::HttpMethod::HTTP_UNKNOWN);
         switch(req->method) {
             case NGX_HTTP_UNKNOWN:
                 OWEBPP_LOG_WARNING("Method [UNKNOWN] provided.");
-                method = owebpp::HttpMethods::HTTP_UNKNOWN;
+                method = owebpp::HttpMethod::HTTP_UNKNOWN;
                 break;
             case NGX_HTTP_GET:
-                method = owebpp::HttpMethods::HTTP_GET;
+                method = owebpp::HttpMethod::HTTP_GET;
                 break;
             case NGX_HTTP_HEAD:
-                method = owebpp::HttpMethods::HTTP_HEAD;
+                method = owebpp::HttpMethod::HTTP_HEAD;
                 break;
             case NGX_HTTP_POST:
-                method = owebpp::HttpMethods::HTTP_POST;
+                method = owebpp::HttpMethod::HTTP_POST;
                 break;
             case NGX_HTTP_PUT:
-                method = owebpp::HttpMethods::HTTP_PUT;
+                method = owebpp::HttpMethod::HTTP_PUT;
                 break;
             case NGX_HTTP_DELETE:
-                method = owebpp::HttpMethods::HTTP_DELETE;
+                method = owebpp::HttpMethod::HTTP_DELETE;
                 break;
             case NGX_HTTP_MKCOL:
-                method = owebpp::HttpMethods::HTTP_MKCOL;
+                method = owebpp::HttpMethod::HTTP_MKCOL;
                 break;
             case NGX_HTTP_COPY:
-                method = owebpp::HttpMethods::HTTP_COPY;
+                method = owebpp::HttpMethod::HTTP_COPY;
                 break;
             case NGX_HTTP_MOVE:
-                method = owebpp::HttpMethods::HTTP_MOVE;
+                method = owebpp::HttpMethod::HTTP_MOVE;
                 break;
             case NGX_HTTP_OPTIONS:
-                method = owebpp::HttpMethods::HTTP_OPTIONS;
+                method = owebpp::HttpMethod::HTTP_OPTIONS;
                 break;
             case NGX_HTTP_PROPFIND:
-                method = owebpp::HttpMethods::HTTP_PROPFIND;
+                method = owebpp::HttpMethod::HTTP_PROPFIND;
                 break;
             case NGX_HTTP_PROPPATCH:
-                method = owebpp::HttpMethods::HTTP_PROPPATCH;
+                method = owebpp::HttpMethod::HTTP_PROPPATCH;
                 break;
             case NGX_HTTP_LOCK:
-                method = owebpp::HttpMethods::HTTP_LOCK;
+                method = owebpp::HttpMethod::HTTP_LOCK;
                 break;
             case NGX_HTTP_UNLOCK:
-                method = owebpp::HttpMethods::HTTP_UNLOCK;
+                method = owebpp::HttpMethod::HTTP_UNLOCK;
                 break;
             case NGX_HTTP_PATCH:
-                method = owebpp::HttpMethods::HTTP_PATCH;
+                method = owebpp::HttpMethod::HTTP_PATCH;
                 break;
             case NGX_HTTP_TRACE:
-                method = owebpp::HttpMethods::HTTP_TRACE;
+                method = owebpp::HttpMethod::HTTP_TRACE;
                 break;
             default:
                 OWEBPP_LOG_WARNING("Unknown method provided: " + std::to_string(req->method));
@@ -140,22 +140,19 @@ extern "C" {
         std::string get_parameter;
         while (std::getline(get_args_stream, get_parameter, '&')) {
             int pos = get_parameter.find_first_of('=');
-            std::string key = get_parameter.substr(pos+1);
-            std::string value = get_parameter.substr(0, pos);
+            std::string key = get_parameter.substr(0, pos);
+            std::string value = get_parameter.substr(pos+1);
             get_args_map[key] = value;
         }
         std::string body((char*)ctx->req_body, ctx->req_body_len);
-        OWEBPP_LOG_INFO("Processing request: " + owebpp::HttpMethodsUtils::convertMethodToString(method) + " " + url + '?'+ get_args);
+        OWEBPP_LOG_INFO("Processing request: " + owebpp::HttpMethodUtils::convertMethodToString(method) + " " + url + '?'+ get_args);
         return std::make_shared<owebpp::Request>(method, url, headers_map, get_args_map, body);
     }
 
     void entryPoint(ngx_link_func_ctx_t *ctx) {
         std::shared_ptr<owebpp::Request> request(buildRequest(ctx));
         std::shared_ptr<owebpp::Response> response = owebpp::Router::getInstance().searchAndExecuteRoute(request);
-        for (const auto& [key, value] : request->getHeaders()) {
-            ngx_link_func_add_header_out(ctx, key.data(), key.size(), value.data(), value.size());
-            OWEBPP_LOG_DEBUG("Reponse Header: " + key + ':' + value);
-        }
+
         ngx_link_func_write_resp(
             ctx,
             (int)response->getSatusCode(),

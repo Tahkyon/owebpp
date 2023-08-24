@@ -35,12 +35,12 @@ namespace example_namespace {
             NamespaceRouteClass() = default;
 
             /* Deleted constructors */
-            NamespaceRouteClass(const NamespaceRouteClass& r) = delete;
-            NamespaceRouteClass(NamespaceRouteClass&& r) = delete;
+            NamespaceRouteClass(const NamespaceRouteClass& o) = delete;
+            NamespaceRouteClass(NamespaceRouteClass&& o) = delete;
 
             /* Deleted assignment operators */
-            NamespaceRouteClass& operator=(const NamespaceRouteClass&) = delete;
-            NamespaceRouteClass& operator=(NamespaceRouteClass&& r) = delete;
+            NamespaceRouteClass& operator=(const NamespaceRouteClass& o) = delete;
+            NamespaceRouteClass& operator=(NamespaceRouteClass&& o) = delete;
 
             /* Destructor */
             virtual ~NamespaceRouteClass() = default;

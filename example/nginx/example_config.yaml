@@ -2,7 +2,7 @@
 routes:
   - no_param_route:
     path: /no_param_route
-    methods: GET
+    methods: GET|POST
     class_name: NoParamRouteClass
     class_include: include/NoParamRouteClass.hpp
     function_name: noParamRouteFunction
@@ -33,3 +33,9 @@ routes:
     class_name: example_namespace::NamespaceRouteClass
     class_include: include/NamespaceRouteClass.hpp
     function_name: namespaceRouteFunction
+  - auth_route:
+    path: /auth_route
+    methods: GET|POST
+    class_name: AuthRoute
+    class_include: include/AuthRoute.hpp
+    function_name: authFunction

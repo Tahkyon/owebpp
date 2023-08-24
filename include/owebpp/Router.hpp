@@ -44,12 +44,12 @@ namespace owebpp {
             Router() : m_routes() { loadRoutes(); }
 
             /* Deleted constructors */
-            Router(const Router& r) = delete;
-            Router(Router&& r) = delete;
+            Router(const Router& o) = delete;
+            Router(Router&& o) = delete;
 
             /* Deleted assignment operators */
-            Router& operator=(const Router&) = delete;
-            Router& operator=(Router&& r) = delete;
+            Router& operator=(const Router& o) = delete;
+            Router& operator=(Router&& o) = delete;
 
             /* Destructor */
             ~Router() = default;

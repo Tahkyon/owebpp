@@ -26,7 +26,7 @@
 
 #include <string>
 #include <map>
-#include <owebpp/HttpMethods.hpp>
+#include <owebpp/HttpMethod.hpp>
 
 namespace owebpp {
     /** Represents an HTTP request. */
@@ -41,7 +41,7 @@ namespace owebpp {
              * @param get_parameters The get parameters sent for this request.
              * @param body The request body.
              */
-            Request(HttpMethods method,
+            Request(HttpMethod method,
                     const std::string& url,
                     const std::map<std::string,std::string>& headers,
                     const std::map<std::string,std::string>& get_parameters,
@@ -53,12 +53,12 @@ namespace owebpp {
                 m_body(body){}
 
             /* Deleted constructors */
-            Request(const Request& r) = delete;
-            Request(Request&& r) = default;
+            Request(const Request& o) = delete;
+            Request(Request&& o) = delete;
 
             /* Deleted assignment operators */
-            Request& operator=(const Request&) = delete;
-            Request& operator=(Request&& r) = delete;
+            Request& operator=(const Request& o) = delete;
+            Request& operator=(Request&& o) = delete;
 
             /* Destructor */
             ~Request() = default;
@@ -68,7 +68,7 @@ namespace owebpp {
              * Getter for the request method.
              * @return the request method.
              */
-            HttpMethods getMethod() const { return m_method; }
+            HttpMethod getMethod() const { return m_method; }
 
             /**
              * Getter for the request url.
@@ -97,7 +97,7 @@ namespace owebpp {
         private:
             /* Members */
             /** The request method */
-            HttpMethods m_method;
+            HttpMethod m_method;
 
             /** The request url */
             std::string m_url;

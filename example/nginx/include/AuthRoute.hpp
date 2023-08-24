@@ -21,38 +21,53 @@
  *    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *    SOFTWARE.
 *************************************************************************************/
-#ifndef ONE_PARAM_ROUTE_CLASS_HPP
-#define ONE_PARAM_ROUTE_CLASS_HPP
+#ifndef AUTH_ROUTE_HPP
+#define AUTH_ROUTE_HPP
 
-#include <memory>
-#include <owebpp/Request.hpp>
-#include <owebpp/Response.hpp>
+#include <owebpp/HttpMethod.hpp>
+#include <owebpp/HttpStatusCode.hpp>
 
-class OneParamRouteClass {
+class AuthRoute {
     public:
         /* Constructors */
-        OneParamRouteClass() = default;
+        AuthRoute() = default;
 
         /* Deleted constructors */
-        OneParamRouteClass(const OneParamRouteClass& o) = delete;
-        OneParamRouteClass(OneParamRouteClass&& o) = delete;
+        AuthRoute(const AuthRoute& o) = delete;
+        AuthRoute(AuthRoute&& o) = delete;
 
         /* Deleted assignment operators */
-        OneParamRouteClass& operator=(const OneParamRouteClass& o) = delete;
-        OneParamRouteClass& operator=(OneParamRouteClass&& o) = delete;
+        AuthRoute& operator=(const AuthRoute& o) = delete;
+        AuthRoute& operator=(AuthRoute&& o) = delete;
 
-        /* Destructor. */
-        virtual ~OneParamRouteClass() = default;
+        /* Destructor */
+        ~AuthRoute() = default;
 
-        /**
-         * This method is called when accessing url /one_param_route/:param1 via GET where :param1 is a parameter.
-         * As you can see the function has a parameter in addition to the request object.
+        /* Functions */
+        /** This method is called when accessing url /auth_route.
+         * If accessed with GET it will return a form to authenticate a user if done through POST it will try to authenticate a user.
          */
-        [[nodiscard]] std::shared_ptr<owebpp::Response> oneParamRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req, const std::string& param1) {
+        std::shared_ptr<owebpp::Response> authFunction(const std::shared_ptr<owebpp::Request>& req) {
             std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-            res->setContent("one param content: " + param1);
+            if(req->getMethod() == owebpp::HttpMethod::HTTP_POST) {
+                if(BasicAuthenticator().authenticate(req)) {
+                    res->setContent("admin authenticated");
+                } else {
+                    res->setContent("could not authenticate.");
+                }
+            } else {
+                std::ifstream t("/usr/local/etc/owebpp-example-lib-nginx/index.html");
+                std::stringstream buffer;
+                buffer << t.rdbuf();
+
+                res->setContent(buffer.str());
+                res->setContentType("text/html");
+                res->setSatusCode(owebpp::HttpStatusCode::OK);
+            }
             return res;
         }
+
+    private:
 };
 
-#endif // ONE_PARAM_ROUTE_CLASS_HPP
+#endif // AUTH_ROUTE_HPP

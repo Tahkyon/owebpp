@@ -36,12 +36,12 @@ class MultipleMethodsRouteClass {
         MultipleMethodsRouteClass() = default;
 
         /* Deleted constructors */
-        MultipleMethodsRouteClass(const MultipleMethodsRouteClass& r) = delete;
-        MultipleMethodsRouteClass(MultipleMethodsRouteClass&& r) = delete;
+        MultipleMethodsRouteClass(const MultipleMethodsRouteClass& o) = delete;
+        MultipleMethodsRouteClass(MultipleMethodsRouteClass&& o) = delete;
 
         /* Deleted assignment operators */
-        MultipleMethodsRouteClass& operator=(const MultipleMethodsRouteClass&) = delete;
-        MultipleMethodsRouteClass& operator=(MultipleMethodsRouteClass&& r) = delete;
+        MultipleMethodsRouteClass& operator=(const MultipleMethodsRouteClass& o) = delete;
+        MultipleMethodsRouteClass& operator=(MultipleMethodsRouteClass&& o) = delete;
 
         /* Destructor */
         virtual ~MultipleMethodsRouteClass() = default;
@@ -50,14 +50,7 @@ class MultipleMethodsRouteClass {
         /** This method is called when accessing url /two_methods_route via GET or POST. */
         [[nodiscard]]  std::shared_ptr<owebpp::Response> multipleMethodsRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req) {
             std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-
-            std::ifstream t("/usr/local/etc/owebpp-example-lib-nginx/index.html");
-            std::stringstream buffer;
-            buffer << t.rdbuf();
-
-            res->setContent(buffer.str());
-            res->setContentType("text/html");
-            res->setSatusCode(owebpp::HttpStatusCode::OK);
+            res->setContent("Multiple methods route.");
             return res;
         }
 };

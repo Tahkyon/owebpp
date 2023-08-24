@@ -25,7 +25,7 @@
 #define OWEBPP_CORE_COMMANDS_MODEL_ROUTE_MODEL_HPP
 
 #include <memory>
-#include <owebpp/HttpMethods.hpp>
+#include <owebpp/HttpMethod.hpp>
 #include <string>
 #include <vector>
 
@@ -65,12 +65,12 @@ namespace owebpp::console {
 
             /* Deleted constructors */
             RouteModel() = delete;
-            RouteModel(const RouteModel& r) = delete;
-            RouteModel(RouteModel&& r) = delete;
+            RouteModel(const RouteModel& o) = delete;
+            RouteModel(RouteModel&& o) = delete;
 
             /* Deleted assignment operators */
-            RouteModel& operator=(const RouteModel& r) = delete;
-            RouteModel& operator=(RouteModel&& r) = delete;
+            RouteModel& operator=(const RouteModel& o) = delete;
+            RouteModel& operator=(RouteModel&& o) = delete;
 
             /* Destructor */
             ~RouteModel() = default;

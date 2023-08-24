@@ -34,12 +34,12 @@ class ThreeParamRouteClass {
         ThreeParamRouteClass() = default;
 
         /* Deleted constructors */
-        ThreeParamRouteClass(const ThreeParamRouteClass& r) = delete;
-        ThreeParamRouteClass(ThreeParamRouteClass&& r) = delete;
+        ThreeParamRouteClass(const ThreeParamRouteClass& o) = delete;
+        ThreeParamRouteClass(ThreeParamRouteClass&& o) = delete;
 
         /* Deleted assignment operators */
-        ThreeParamRouteClass& operator=(const ThreeParamRouteClass&) = delete;
-        ThreeParamRouteClass& operator=(ThreeParamRouteClass&& r) = delete;
+        ThreeParamRouteClass& operator=(const ThreeParamRouteClass& o) = delete;
+        ThreeParamRouteClass& operator=(ThreeParamRouteClass&& o) = delete;
 
         /* Destructor */
         virtual ~ThreeParamRouteClass() = default;
@@ -50,7 +50,7 @@ class ThreeParamRouteClass {
          */
         [[nodiscard]] std::shared_ptr<owebpp::Response> threeParamRouteFunction([[maybe_unused]] const std::shared_ptr<owebpp::Request>& req, const std::string& param1, const std::string& param2, const std::string& param3) {
             std::shared_ptr<owebpp::Response> res = std::make_shared<owebpp::Response>();
-            res->setContent("one param content: " + param1 + " " + param2 + " " + param3);
+            res->setContent("three param content: " + param1 + " " + param2 + " " + param3);
             return res;
         }
 };
